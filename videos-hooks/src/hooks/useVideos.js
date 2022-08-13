@@ -4,10 +4,6 @@ import youtube from '../api/youtube';
 const useVideos = (defaultSearchTerm) => {
 	const [videos, setVideos] = useState([]);
 
-	useEffect(() => {
-		search(defaultSearchTerm);
-	}, [defaultSearchTerm]);
-
 	const search = async (term) => {
 		const response = await youtube.get('/search', {
 			params: {
@@ -17,6 +13,10 @@ const useVideos = (defaultSearchTerm) => {
 		
 		setVideos(response.data.items);
 	};
+
+	useEffect(() => {
+		search(defaultSearchTerm);
+	}, [defaultSearchTerm]);
 
 	return [videos, search];
 };
